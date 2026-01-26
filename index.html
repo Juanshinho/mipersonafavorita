@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Para El Amor De Mi Vida</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Aquí luego conectas tu CSS -->
+</head>
+<body>
+
+    <!-- Encabezado -->
+    <header>
+    <h1>La Bitácora de Paula & Juanjosé 💖</h1>
+    <p>Nuestra historia de amor escrita en recuerdos</p>
+    
+</header>
+
+    <!-- Contenido principal -->
+    <main>
+
+        <section class="contador-amor">
+    <h2>⏳ Nuestro tiempo siendo novios 🩷</h2>
+    <div id="tiempoJuntos" class="tiempo-juntos"></div>
+</section>
+
+
+    <section>
+        <h2>Recuerdos especiales</h2>
+
+        <div class="recuerdo">
+            <h3>💖 Nuestro primer día juntos</h3>
+            <p>En multiplaza, fue como en junio o julio del 2024 la primera vez que nos vimos en persona, me enamore mas de lo que ya estaba, fue muy chevere ese dia, nunca lo voy a olvidar.</p>
+        </div>
+
+        <div class="recuerdo">
+            <h3>😰 Parque de los novios</h3>
+            <p>Ese dia las cosas no salieron para nada como las teniamos planeadas pero pues fue especial pq salimos de la rutina, me mostraste stranger things por primera vez, casi te matan los patos, y casi nos vamos en transmilenio, pero no se pudo kjjajka<p>
+        </div>
+
+        <div class="recuerdo">
+            <h3>📱 Las llamadas diarias</h3>
+            <p>Eran como los momentos mas personales, divertidos y el momento que mas esperaba en el dia, me encantaba escucharte y hablar contigo.</p>
+        </div>
+
+        <div class="recuerdo">
+            <h3>🦶 El dia de las cosquillas</h3>
+            <p>Sin palabras, me dio mucha risa ese dia.</p>
+        </div>
+
+        <div class="recuerdo">
+            <h3>🩷 Cuando nos hicimos novios</h3>
+            <p>Creo que no hay nada que decir, te amo mucho.</p>
+        </div>
+
+        <div class="recuerdo">
+            <h3>🫶 Cumpleaños</h3>
+            <p>Fue un dia que en verdad no esperaba nada, y te agradezco de todo corazon ese gesto tan bonito que tuviste conmigo ese dia, eres mi persona favorita.</p>
+        </div>
+
+    </section>
+
+    <section class="razones-amor">
+    <h2>💕 Razones por las que te amo</h2>
+    <div id="razonActual" class="razon-texto">Toca el botón 💖</div>
+    <button id="botonRazon" class="boton-razon">Descubrir una razón 💌</button>
+</section>
+
+    <section>
+    <h2>Nuestros recuerdos en fotos 📸</h2>
+
+    <div class="galeria">
+        <img src="imagenes/foto1.jpg" class="img-galeria">
+        <img src="imagenes/foto2.jpg" class="img-galeria">
+        <img src="imagenes/foto3.jpg" class="img-galeria">
+        <img src="imagenes/foto4.jpg" class="img-galeria">
+        <img src="imagenes/foto5.jpg" class="img-galeria">
+        <img src="imagenes/foto6.jpg" class="img-galeria">
+        <img src="imagenes/foto7.jpg" class="img-galeria">
+        <img src="imagenes/foto8.jpg" class="img-galeria">
+        <img src="imagenes/foto9.jpg" class="img-galeria">
+        <img src="imagenes/foto10.jpg" class="img-galeria">
+        <img src="imagenes/foto11.jpg" class="img-galeria">
+        
+    </div>
+</section>
+
+<section>
+    <h2>Fechas importantes 📆</h2>
+
+    <div class="recuerdo">
+        <h3>💞 Nos conocimos</h3>
+        <p>Fecha: 12 de mayo de 2023</p>
+        <p>Aquí puedes escribir cómo fue ese día.</p>
+    </div>
+
+    <div class="recuerdo">
+        <h3>🩷 Novios</h3>
+        <p>Fecha: 20 de diciembre de 2025</p>
+        <p>El día que comenzó oficialmente nuestra historia, pero como novios.</p>
+    </div>
+
+    <div class="recuerdo">
+        <h3>💋 Nuestro primer beso</h3>
+        <p>Fecha: Cuando nos conocimos</p>
+        <p>Ese piquito en las sillas al lado de los baños kjajka, increible.</p>
+    </div>
+</section>
+
+</main>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2026 - Te amo mi Princesa</p>
+    </footer>
+
+    <!-- Visor de imágenes -->
+<div class="visor" id="visor">
+    <span class="cerrar" id="cerrar">&times;</span>
+    <span class="anterior" id="anterior">&#10094;</span>
+
+    <div class="contenedor-imagen">
+        <img id="imagen-grande">
+        <div class="indicadores" id="indicadores"></div>
+    </div>
+
+    <span class="siguiente" id="siguiente">&#10095;</span>
+</div>
+
+
+<script>
+    const imagenes = document.querySelectorAll(".img-galeria");
+    const visor = document.getElementById("visor");
+    const imagenGrande = document.getElementById("imagen-grande");
+    const cerrar = document.getElementById("cerrar");
+    const anterior = document.getElementById("anterior");
+    const siguiente = document.getElementById("siguiente");
+    const indicadores = document.getElementById("indicadores");
+
+
+    let indiceActual = 0;
+
+    // Abrir visor al hacer clic
+    imagenes.forEach((img, index) => {
+        img.addEventListener("click", () => {
+    indiceActual = index;
+    mostrarImagen();
+    actualizarIndicadores();
+
+    visor.style.display = "flex";
+
+    // Pequeño truco para que la animación funcione
+    setTimeout(() => {
+        visor.classList.add("activo");
+    }, 10);
+});
+
+    });
+
+    function mostrarImagen() {
+        imagenGrande.src = imagenes[indiceActual].src;
+    }
+    
+    function actualizarIndicadores() {
+    indicadores.innerHTML = "";
+
+    imagenes.forEach((img, index) => {
+        const punto = document.createElement("span");
+
+        if (index === indiceActual) {
+            punto.classList.add("activo");
+        }
+
+        // Permite hacer clic en una bolita para ir a esa foto
+        punto.addEventListener("click", () => {
+            indiceActual = index;
+            mostrarImagen();
+            actualizarIndicadores();
+        });
+
+        indicadores.appendChild(punto);
+    });
+}
+
+
+    // Cerrar visor
+    cerrar.addEventListener("click", () => {
+        visor.classList.remove("activo");
+        setTimeout(() => {
+          visor.style.display = "none";
+    }, 400);
+
+    });
+
+    // Imagen anterior
+    anterior.addEventListener("click", () => {
+        indiceActual--;
+        if (indiceActual < 0) {
+            indiceActual = imagenes.length - 1;
+        }
+        mostrarImagen();
+        actualizarIndicadores();
+
+    });
+
+    // Imagen siguiente
+    siguiente.addEventListener("click", () => {
+        indiceActual++;
+        if (indiceActual >= imagenes.length) {
+            indiceActual = 0;
+        }
+        mostrarImagen();
+        actualizarIndicadores();
+
+    });
+
+     //DESLIZAR CON EL DEDO EN CELULAR
+    let inicioX = 0;
+    let finX = 0;
+
+    // Detectar cuando el usuario toca la pantalla
+    visor.addEventListener("touchstart", (e) => {
+        inicioX = e.touches[0].clientX;
+    });
+
+    // Detectar cuando suelta el dedo
+    visor.addEventListener("touchend", (e) => {
+        finX = e.changedTouches[0].clientX;
+        manejarDeslizamiento();
+    });
+
+    function manejarDeslizamiento() {
+        let diferencia = inicioX - finX;
+
+        // Si desliza suficientemente
+        if (Math.abs(diferencia) > 50) {
+            if (diferencia > 0) {
+                // Deslizó a la izquierda → siguiente
+                indiceActual++;
+                if (indiceActual >= imagenes.length) {
+                    indiceActual = 0;
+                }
+            } else {
+                // Deslizó a la derecha → anterior
+                indiceActual--;
+                if (indiceActual < 0) {
+                    indiceActual = imagenes.length - 1;
+                }
+            }
+            mostrarImagen();
+            actualizarIndicadores();
+
+        }
+    }
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const botonSecreto = document.getElementById("botonSecreto");
+    const cartaOverlay = document.getElementById("cartaOverlay");
+    const cerrarCarta = document.getElementById("cerrarCarta");
+
+    // Mensajes románticos
+    const mensajes = [
+    "Te amo 💕",
+    "Mi persona favorita 💖",
+    "Para siempre contigo 💍",
+    "Gracias por existir 🌸",
+    "Eres mi mundo 🌎",
+    "Contigo todo es mejor ✨",
+    "Me encanta ser tu novio 💑",
+    "Mi historia más bonita 📖",
+    "El amor de mi vida 🩷♾️",
+    "Quiero envejecer contigo 👴👵"
+];
+
+let mensajesActivos = [];
+
+// 💕 Razones por las que te amo
+const razones = [
+    "Porque eres una excelente persona 💖",
+    "Porque contigo todo es más bonito ✨",
+    "Porque siempre me haces sentir en casa 💑",
+    "Porque eres mi persona favorita 💕",
+    "Porque me apoyas siempre 💖",
+    "Porque amo cómo te ríes 😭❤️",
+    "Porque contigo quiero todo mi futuro 💍",
+    "Porque contigo conecto a la perfeccion ♾️",
+    "Porque siempre tienes un momentito para mi ⏰",
+    "Porque nunca me dejas solo 🫂",
+    "Porque cualquier dia juntos es especial ☀️",
+    "Porque me encantan tus abrazos y tus besos 🫂",
+    "Porque contigo soy muy feliz 🥹❤️",
+    "Porque eres muy muy muy guapa 😍",
+    "Porque me haces querer ser mejor persona 💪✨",
+    "Porque eres mi historia mas bonita 📖💞",
+    "Porque me encanta cómo dices mi nombre 💕",
+    "Porque contigo hasta el silencio es bonito 🩷",
+    "Porque confío en ti más que en nadie 💫",
+    "Porque haces especial cualquier momento ✨",
+    "Porque me enamoro de ti todos los días 💘",
+    "Porque simplemente… eres tú 💖"
+];
+
+const botonRazon = document.getElementById("botonRazon");
+const razonActual = document.getElementById("razonActual");
+
+botonRazon.addEventListener("click", () => {
+    const random = Math.floor(Math.random() * razones.length);
+    razonActual.innerText = razones[random];
+});
+
+// ⏳ Contador de tiempo juntos con animación
+function actualizarTiempoJuntos() {
+    const fechaInicio = new Date("2025-12-20T23:59:59"); // 🔴 TU FECHA REAL
+
+    const ahora = new Date();
+    const diferencia = ahora - fechaInicio;
+
+    const segundos = Math.floor(diferencia / 1000);
+    const minutos = Math.floor(segundos / 60);
+    const horas = Math.floor(minutos / 60);
+    const dias = Math.floor(horas / 24);
+
+    const años = Math.floor(dias / 365);
+    const meses = Math.floor((dias % 365) / 30);
+    const diasRestantes = dias % 30;
+
+    const horasRestantes = horas % 24;
+    const minutosRestantes = minutos % 60;
+
+    const texto = `
+        ❤️ ${años} años, ${meses} meses, ${diasRestantes} días<br>
+        ⏰ ${horasRestantes} horas, ${minutosRestantes} minutos
+    `;
+
+    const contenedor = document.getElementById("tiempoJuntos");
+
+    // ✨ Animación suave
+    contenedor.classList.add("tiempo-animado");
+
+    setTimeout(() => {
+        contenedor.innerHTML = texto;
+        contenedor.classList.remove("tiempo-animado");
+    }, 300);
+}
+
+// Actualizar cada minuto
+actualizarTiempoJuntos();
+setInterval(actualizarTiempoJuntos, 60000);
+
+
+function crearMensajes() {
+    for (let i = 0; i < 8; i++) {
+        const mensaje = document.createElement("div");
+        mensaje.classList.add("mensaje-flotante");
+        mensaje.innerText = mensajes[Math.floor(Math.random() * mensajes.length)];
+
+        // Posición aleatoria alrededor de la pantalla
+        mensaje.style.left = Math.random() * 80 + 10 + "vw";
+        mensaje.style.top = Math.random() * 80 + 10 + "vh";
+
+        document.body.appendChild(mensaje);
+        mensajesActivos.push(mensaje);
+
+        // Quitar después de la animación
+        setTimeout(() => {
+            mensaje.remove();
+        }, 4000);
+    }
+}
+function borrarMensajes() {
+    mensajesActivos.forEach(m => m.remove());
+    mensajesActivos = [];
+}
+
+    // Abrir carta
+    botonSecreto.addEventListener("click", () => {
+    cartaOverlay.style.display = "flex";
+    crearMensajes();   // 💕 Aparecen los mensajes
+    });
+
+
+    // Cerrar con la X
+    cerrarCarta.addEventListener("click", () => {
+    cartaOverlay.style.display = "none";
+    borrarMensajes();   // 🫥 Desaparecen los mensajes
+    });
+
+
+    // Cerrar tocando fuera de la carta
+    cartaOverlay.addEventListener("click", (e) => {
+    if (e.target === cartaOverlay) {
+        cartaOverlay.style.display = "none";
+        borrarMensajes();   // 🫥 También desaparecen aquí
+    }
+    });
+});
+</script>
+
+<!-- Botón secreto -->
+<button class="boton-secreto" id="botonSecreto">💌</button>
+
+<!-- Carta sorpresa -->
+<div class="carta-overlay" id="cartaOverlay">
+    <div class="carta">
+        <span class="cerrar-carta" id="cerrarCarta">&times;</span>
+        <h2>Para Paula 💖</h2>
+        <p>
+            Mi Princesa,<br><br>
+            Esta página es solo un pequeño pedacito de todo lo que siento por ti.  
+            Gracias por cada risa, cada abrazo, cada beso, cada conversación y cada momento que vivimos juntos.  
+            Eres mi persona favorita en este mundo y mi historia más bonita, espero que esta historia nunca acabe y lleguemos a viejitos con la misma llama que tenemos ahora en nuestra juventud 💕<br><br>
+            Te amo con todo mi corazón mi Princesa. Nunca lo olvides 🩷♾️. 
+        </p>
+        <p class="firma">— Juanjosé 💌</p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,458 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Arial', sans-serif;
+}
+
+/* Fondo general */
+body {
+    background: linear-gradient(135deg, #fde2e4, #e0c3fc);
+    color: #4a2c2a;
+    line-height: 1.6;
+}
+
+/* Encabezado */
+header {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(5px);
+    padding: 30px;
+    text-align: center;
+    border-bottom: 3px solid #f9a8d4;
+}
+
+header h1 {
+    font-size: 32px;
+    color: #be185d;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-style: italic;
+    color: #7c2d12;
+}
+
+/* Menú */
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 15px;
+}
+
+nav a {
+    color: #9d174d;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ec4899;
+}
+
+/* Contenido principal */
+main {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+/* Secciones */
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #9d174d;
+    margin-bottom: 15px;
+    border-bottom: 2px dashed #f9a8d4;
+    padding-bottom: 5px;
+}
+
+/* Tarjetas tipo recuerdo */
+.recuerdo {
+    background-color: #fff0f6;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #f9a8d4;
+}
+
+/* Barra lateral */
+aside {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+    padding: 25px;
+    background-color: #fdf2f8;
+    border-radius: 20px;
+    color: #9d174d;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #7c2d12;
+    margin-top: 60px;
+    border-top: 3px solid #f9a8d4;
+}
+
+/* Galería de fotos */
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+}
+
+.galeria img {
+    width: 100%;
+    height: 150px;              /* 🔥 TODAS MISMO ALTO */
+    object-fit: cover;          /* 🔥 RECORTA SIN DEFORMAR */
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.galeria img:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 600px) {
+    .galeria {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .galeria img {
+        height: 110px;
+        object-fit: cover;
+    }
+}
+
+
+
+/* Videos en la galería */
+.galeria video {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.galeria video:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+/* Visor de imágenes (lightbox) */
+.visor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* Cuando está activo */
+.visor.activo {
+    display: flex;
+    opacity: 1;
+}
+
+.visor img {
+    max-width: 90vw;
+    max-height: 75vh;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.3);
+    transform: scale(0.8);
+    transition: transform 0.4s ease;
+}
+
+/* Imagen animada al abrir */
+.visor.activo img {
+    transform: scale(1);
+}
+
+
+/* Botón cerrar */
+.cerrar {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Flechas */
+.anterior, .siguiente {
+    position: absolute;
+    top: 50%;
+    font-size: 50px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+    padding: 10px;
+    z-index: 1000;          /* 🔥 Las trae al frente */
+}
+
+
+.anterior {
+    left: 30px;
+}
+
+.siguiente {
+    right: 30px;
+}
+
+/* Contenedor de imagen + indicadores */
+.contenedor-imagen {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Indicadores (bolitas) */
+.indicadores {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.indicadores span {
+    width: 12px;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+/* Bolita activa */
+.indicadores .activo {
+    background-color: white;
+    transform: scale(1.3);
+}
+
+/* Botón secreto */
+.boton-secreto {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ff5c8a;
+    border: none;
+    border-radius: 50%;
+    width: 55px;
+    height: 55px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    transition: transform 0.3s, opacity 0.3s;
+    opacity: 0.7;
+}
+
+.boton-secreto:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* Fondo oscuro de la carta */
+.carta-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+/* Caja de la carta */
+.carta {
+    background: #fff;
+    max-width: 400px;
+    width: 85%;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    animation: aparecerCarta 0.5s ease;
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.5);
+}
+
+.carta h2 {
+    color: #ff5c8a;
+    margin-bottom: 15px;
+}
+
+.carta p {
+    color: #333;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+.firma {
+    margin-top: 20px;
+    font-weight: bold;
+    color: #ff5c8a;
+}
+
+/* Botón cerrar */
+.cerrar-carta {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+}
+
+.cerrar-carta:hover {
+    color: #ff5c8a;
+}
+
+/* Animación suave */
+@keyframes aparecerCarta {
+    from {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 📱 Estilos SOLO para celular */
+@media (max-width: 768px) {
+
+    .galeria {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .galeria img {
+        width: 100%;
+        height: 110px;          /* Altura fija tipo Instagram */
+        object-fit: cover;     /* Recorta bonito sin deformar */
+        border-radius: 10px;
+    }
+
+}
+
+/* Mensajes flotantes románticos */
+.mensaje-flotante {
+    position: fixed;
+    font-size: 14px;
+    color: #ff5c8a;
+    font-weight: bold;
+    opacity: 0;
+    animation: flotar 4s ease-in-out forwards;
+    pointer-events: none;
+    z-index: 3000;
+}
+
+/* Animación de flotar */
+@keyframes flotar {
+    0% {
+        transform: translateY(20px) scale(0.8);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-60px) scale(1);
+        opacity: 0;
+    }
+}
+
+.contador-amor {
+    text-align: center;
+    margin: 20px 0;
+    background: #fff0f5;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.contador-amor h2 {
+    color: #ff4d79;
+    margin-bottom: 15px;
+}
+
+.tiempo-juntos {
+    font-size: 18px;
+    color: #444;
+    font-weight: bold;
+}
+
+.razones-amor {
+    text-align: center;
+    margin: 40px 0;
+    background: #ffe6f0;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.razones-amor h2 {
+    color: #ff4d79;
+    margin-bottom: 15px;
+}
+
+.razon-texto {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 15px;
+    min-height: 40px;
+}
+
+.boton-razon {
+    background: #ff4d79;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.boton-razon:hover {
+    background: #ff2f65;
+    transform: scale(1.05);
+}
+
+/* ✨ Animación del contador */
+.tiempo-juntos {
+    font-size: 18px;
+    color: #444;
+    font-weight: bold;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tiempo-animado {
+    opacity: 0;
+    transform: scale(0.95);
+}
